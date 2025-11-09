@@ -1,0 +1,13 @@
+{
+  "name": "agentmesh-mcp-server",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "express": "^4.21.1",
+    "cors": "^2.8.5"
+  }
+}
