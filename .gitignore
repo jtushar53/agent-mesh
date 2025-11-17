@@ -39,3 +39,6 @@ models/
 .env
 .env.local
 .env.*.local
+
+# Project planning (internal use only)
+PROJECT_SUMMARY.md
