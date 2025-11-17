@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from 'react'
 import { ReActAgent } from '@/agents'
-import { LLMService, MCPBrowserClient } from '@/services'
+import { MCPBrowserClient } from '@/services'
 import { useAppStore } from '@/store'
 import type { AgentStep, MCPTool } from '@/types'
 import './AgentViewer.css'

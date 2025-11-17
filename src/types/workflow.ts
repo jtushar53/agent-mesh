@@ -47,12 +47,12 @@ export type WorkflowNodeData =
   | OutputNodeData
   | ConditionNodeData
 
-export interface WorkflowNode extends Node {
+export interface WorkflowNode extends Node<WorkflowNodeData> {
   type: NodeType
   data: WorkflowNodeData
 }
 
-export interface WorkflowEdge extends Edge {
+export type WorkflowEdge = Edge & {
   animated?: boolean
   label?: string
 }

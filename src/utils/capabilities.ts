@@ -35,7 +35,7 @@ export class BrowserAICapabilities {
     }
 
     try {
-      const adapter = await navigator.gpu.requestAdapter()
+      const adapter = await (navigator.gpu as any).requestAdapter()
       return !!adapter
     } catch (error) {
       console.warn('WebGPU check failed:', error)
@@ -176,7 +176,7 @@ export class BrowserAICapabilities {
     }
 
     try {
-      const adapter = await navigator.gpu.requestAdapter()
+      const adapter = await (navigator.gpu as any).requestAdapter()
       if (!adapter) {
         return null
       }

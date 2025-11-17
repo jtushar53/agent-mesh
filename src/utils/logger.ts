@@ -19,7 +19,7 @@ class Logger {
       level,
       message,
       timestamp: Date.now(),
-      context,
+      ...(context && { context }),
     }
 
     this.logs.push(entry)

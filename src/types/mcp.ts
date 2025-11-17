@@ -2,8 +2,6 @@
  * Model Context Protocol (MCP) type definitions
  */
 
-import type { z } from 'zod'
-
 export interface MCPServerConfig {
   name: string
   url: string
@@ -14,7 +12,7 @@ export interface MCPServerConfig {
 export interface MCPTool {
   name: string
   description: string
-  inputSchema: z.ZodType<unknown>
+  inputSchema: any // JSON Schema from MCP server
   destructiveHint?: boolean
 }
 
@@ -34,14 +32,14 @@ export interface MCPToolResult {
 export interface MCPResource {
   uri: string
   name: string
-  description?: string
-  mimeType?: string
+  description: string
+  mimeType: string
 }
 
 export interface MCPPrompt {
   name: string
-  description?: string
-  arguments?: Record<string, unknown>
+  description: string
+  arguments: Record<string, unknown>
 }
 
 export interface MCPSession {

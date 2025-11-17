@@ -34,7 +34,7 @@ interface AppState {
   llmService: LLMService | null
   setLLMService: (service: LLMService | null) => void
   llmStats: InferenceStats | null
-  setLLMStats: (stats: InferenceStats) => void
+  setLLMStats: (stats: InferenceStats | null) => void
   modelLoading: boolean
   setModelLoading: (loading: boolean) => void
   modelLoadProgress: { text: string; progress: number } | null

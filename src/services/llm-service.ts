@@ -153,12 +153,12 @@ export class LLMService {
 
     try {
       const completion = await this.engine.chat.completions.create({
-        messages: request.messages,
+        messages: request.messages as any,
         temperature: request.temperature,
-        max_tokens: request.maxTokens,
-        top_p: request.topP,
+        max_tokens: request.maxTokens ?? null,
+        top_p: request.topP ?? null,
         stream: false, // Handle streaming separately
-      })
+      } as any)
 
       const inferenceTime = Date.now() - startTime
 
@@ -183,17 +183,20 @@ export class LLMService {
         tokensPerSecond: this.stats.tokensPerSecond.toFixed(2),
       })
 
-      return {
+      const response: ChatCompletionResponse = {
         content,
         finishReason,
-        usage: completion.usage
-          ? {
-              promptTokens: completion.usage.prompt_tokens,
-              completionTokens: completion.usage.completion_tokens,
-              totalTokens: completion.usage.total_tokens,
-            }
-          : undefined,
       }
+
+      if (completion.usage) {
+        response.usage = {
+          promptTokens: completion.usage.prompt_tokens,
+          completionTokens: completion.usage.completion_tokens,
+          totalTokens: completion.usage.total_tokens,
+        }
+      }
+
+      return response
     } catch (error) {
       logger.error('Chat completion failed', {
         error: error instanceof Error ? error.message : String(error),
@@ -202,7 +205,6 @@ export class LLMService {
       return {
         content: '',
         finishReason: 'error',
-        usage: undefined,
       }
     }
   }
@@ -224,13 +226,13 @@ export class LLMService {
     })
 
     try {
-      const stream = await this.engine.chat.completions.create({
-        messages: request.messages,
+      const stream = (await this.engine.chat.completions.create({
+        messages: request.messages as any,
         temperature: request.temperature,
-        max_tokens: request.maxTokens,
-        top_p: request.topP,
+        max_tokens: request.maxTokens ?? null,
+        top_p: request.topP ?? null,
         stream: true,
-      })
+      } as any)) as unknown as AsyncIterable<any>
 
       for await (const chunk of stream) {
         const content = chunk.choices[0]?.delta.content

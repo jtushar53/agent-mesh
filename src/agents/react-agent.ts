@@ -10,7 +10,6 @@ import type {
   AgentEventCallback,
   AgentEvent,
   ChatMessage,
-  MCPTool,
 } from '@/types'
 import { LLMService } from '@/services/llm-service'
 import { MCPBrowserClient } from '@/services/mcp-client'
@@ -22,6 +21,7 @@ export class ReActAgent {
   private mcpClient: MCPBrowserClient | null = null
   private state: AgentState
   private eventCallbacks: AgentEventCallback[] = []
+  private cachedToolDescriptions: string | null = null
 
   constructor(
     config: AgentConfig,
@@ -190,12 +190,22 @@ export class ReActAgent {
   }
 
   /**
+   * Get cached tool descriptions
+   */
+  private getToolDescriptions(): string {
+    if (!this.cachedToolDescriptions) {
+      this.cachedToolDescriptions = this.config.tools
+        .map((tool) => `- ${tool.name}: ${tool.description}`)
+        .join('\n')
+    }
+    return this.cachedToolDescriptions
+  }
+
+  /**
    * Build ReAct-style prompt
    */
   private buildReActPrompt(task: string): string {
-    const toolDescriptions = this.config.tools
-      .map((tool) => `- ${tool.name}: ${tool.description}`)
-      .join('\n')
+    const toolDescriptions = this.getToolDescriptions()
 
     const previousSteps = this.state.steps
       .map((step) => {
@@ -235,12 +245,11 @@ What's your next step?
   /**
    * Parse the LLM thought to extract action or final answer
    */
-  private parseThought(thought: string): {
-    type: 'action' | 'final_answer'
-    toolName?: string
-    toolInput?: Record<string, unknown>
-    answer?: string
-  } {
+  private parseThought(
+    thought: string
+  ):
+    | { type: 'action'; toolName: string; toolInput: Record<string, unknown> }
+    | { type: 'final_answer'; answer: string } {
     // Check for Final Answer
     const finalAnswerMatch = thought.match(/Final Answer:\s*(.+)/i)
     if (finalAnswerMatch) {

@@ -57,7 +57,7 @@ export class MCPBrowserClient {
         new URL(this.serverConfig.url)
       )
 
-      await this.client.connect(this.transport)
+      await this.client.connect(this.transport as any)
 
       // List available tools, resources, and prompts
       const [toolsResponse, resourcesResponse, promptsResponse] =
@@ -144,7 +144,6 @@ export class MCPBrowserClient {
       return response.tools.map((tool) => ({
         name: tool.name,
         description: tool.description ?? '',
-        // @ts-expect-error - inputSchema is available but types are complex
         inputSchema: tool.inputSchema,
       }))
     } catch (error) {
@@ -164,8 +163,8 @@ export class MCPBrowserClient {
       return response.resources.map((resource) => ({
         uri: resource.uri,
         name: resource.name,
-        description: resource.description,
-        mimeType: resource.mimeType,
+        description: resource.description ?? '',
+        mimeType: resource.mimeType ?? '',
       }))
     } catch (error) {
       logger.error('Failed to list resources', {
@@ -183,8 +182,8 @@ export class MCPBrowserClient {
       const response = await this.client.listPrompts()
       return response.prompts.map((prompt) => ({
         name: prompt.name,
-        description: prompt.description,
-        arguments: prompt.arguments as Record<string, unknown> | undefined,
+        description: prompt.description ?? '',
+        arguments: (prompt.arguments as any) ?? {},
       }))
     } catch (error) {
       logger.error('Failed to list prompts', {
@@ -219,8 +218,9 @@ export class MCPBrowserClient {
 
       // Parse result content
       let content: unknown
-      if (result.content && result.content.length > 0) {
-        const firstContent = result.content[0]
+      const resultContent = result.content as any[]
+      if (resultContent && resultContent.length > 0) {
+        const firstContent = resultContent[0]
         if (firstContent && 'text' in firstContent) {
           try {
             content = JSON.parse(firstContent.text)
@@ -228,7 +228,7 @@ export class MCPBrowserClient {
             content = firstContent.text
           }
         } else {
-          content = result.content
+          content = resultContent
         }
       }
 

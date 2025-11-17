@@ -49,8 +49,7 @@ export function MCPManager() {
   const [isExecuting, setIsExecuting] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const { addMCPSession, removeMCPSession, addMCPClient, mcpSessions } =
-    useAppStore()
+  const { addMCPSession, removeMCPSession, addMCPClient } = useAppStore()
 
   const handleConnectSingle = async () => {
     setIsConnecting(true)
@@ -115,7 +114,9 @@ export function MCPManager() {
           const mcpConfig: MCPServerConfig = {
             name,
             url: serverConfig.url,
-            description: serverConfig.description,
+            ...(serverConfig.description && {
+              description: serverConfig.description,
+            }),
             enabled: true,
           }
 
