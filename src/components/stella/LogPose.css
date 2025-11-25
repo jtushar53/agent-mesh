@@ -1,0 +1,284 @@
+/**
+ * Log Pose Styles
+ * Navigation timeline with cyber-nautical aesthetic
+ */
+
+.logpose {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--color-bg-card);
+  border: var(--border-thin);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.logpose-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: linear-gradient(90deg, var(--color-bg-tertiary), transparent);
+  border-bottom: var(--border-thin);
+}
+
+.logpose-compass {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.compass-ring {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--color-holo-blue);
+  border-radius: 50%;
+  position: relative;
+  animation: compass-pulse 3s ease-in-out infinite;
+}
+
+.compass-needle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 20px;
+  background: linear-gradient(to bottom, var(--color-neon-pink) 50%, var(--color-holo-blue) 50%);
+  border-radius: var(--radius-full);
+  transform: translate(-50%, -50%);
+  animation: compass-spin 10s linear infinite;
+}
+
+@keyframes compass-pulse {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--color-holo-blue-glow);
+  }
+  50% {
+    box-shadow: 0 0 15px var(--color-holo-blue-glow);
+  }
+}
+
+@keyframes compass-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.logpose-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-main {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-holo-blue);
+}
+
+.title-sub {
+  font-size: var(--font-size-xs);
+  color: var(--color-lab-white-dim);
+  opacity: 0.7;
+}
+
+.logpose-timeline {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-md);
+}
+
+.logpose-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: var(--space-md);
+  opacity: 0.5;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.empty-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-lab-white-dim);
+  font-style: italic;
+}
+
+.logpose-entry {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.logpose-entry:hover {
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  padding-left: var(--space-sm);
+  margin-left: calc(-1 * var(--space-sm));
+}
+
+.logpose-entry.current {
+  background: var(--color-holo-blue-dim);
+  border-radius: var(--radius-md);
+  padding-left: var(--space-sm);
+  margin-left: calc(-1 * var(--space-sm));
+}
+
+.entry-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.connector-line {
+  width: 2px;
+  height: 100%;
+  min-height: 20px;
+  background: var(--color-holo-blue-dim);
+}
+
+.logpose-entry:first-child .connector-line {
+  background: linear-gradient(to bottom, transparent 50%, var(--color-holo-blue-dim) 50%);
+}
+
+.logpose-entry:last-child .connector-line {
+  background: linear-gradient(to bottom, var(--color-holo-blue-dim) 50%, transparent 50%);
+}
+
+.connector-node {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-secondary);
+  border: 2px solid var(--color-holo-blue-dim);
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+  margin: 4px 0;
+}
+
+.node-emoji {
+  font-size: 0.9rem;
+}
+
+/* Entry status styles */
+.logpose-entry.status-active .connector-node {
+  border-color: var(--color-warning);
+  box-shadow: 0 0 10px var(--color-warning);
+  animation: pulse-glow 1s infinite;
+}
+
+.logpose-entry.status-completed .connector-node {
+  border-color: var(--color-success);
+  background: var(--color-success);
+}
+
+.logpose-entry.status-completed .node-emoji {
+  filter: brightness(0) invert(1);
+}
+
+.logpose-entry.status-failed .connector-node {
+  border-color: var(--color-error);
+  background: var(--color-error);
+}
+
+.entry-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.entry-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-bottom: 2px;
+}
+
+.entry-satellite {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-tertiary);
+}
+
+.entry-satellite.satellite-shaka { color: var(--color-shaka); }
+.entry-satellite.satellite-lilith { color: var(--color-lilith); }
+.entry-satellite.satellite-edison { color: var(--color-edison); }
+.entry-satellite.satellite-pythagoras { color: var(--color-pythagoras); }
+.entry-satellite.satellite-atlas { color: var(--color-atlas); }
+.entry-satellite.satellite-york { color: var(--color-york); }
+
+.entry-time {
+  font-size: var(--font-size-xs);
+  color: var(--color-lab-white-dim);
+  opacity: 0.6;
+}
+
+.entry-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-lab-white);
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.entry-status {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+
+.entry-status.pending {
+  color: var(--color-lab-white-dim);
+}
+
+.entry-status.active {
+  color: var(--color-warning);
+}
+
+.entry-status.completed {
+  color: var(--color-success);
+}
+
+.entry-status.failed {
+  color: var(--color-error);
+}
+
+/* Entry type styles */
+.logpose-entry.user .entry-text {
+  font-style: italic;
+  color: var(--color-holo-blue);
+}
+
+.logpose-entry.system .entry-text {
+  color: var(--color-lab-white-dim);
+  opacity: 0.7;
+}

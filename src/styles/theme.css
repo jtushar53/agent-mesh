@@ -1,0 +1,356 @@
+/**
+ * Project Stella - Egghead Aesthetics Theme
+ * Cyber-Future-Retro design inspired by Dr. Vegapunk's laboratory
+ */
+
+:root {
+  /* === Core Colors === */
+  --color-bg-primary: #0a0a0f;
+  --color-bg-secondary: #12121a;
+  --color-bg-tertiary: #1a1a25;
+  --color-bg-card: rgba(26, 26, 37, 0.8);
+
+  /* Holographic Blue */
+  --color-holo-blue: #00d4ff;
+  --color-holo-blue-dim: rgba(0, 212, 255, 0.3);
+  --color-holo-blue-glow: rgba(0, 212, 255, 0.5);
+
+  /* Neon Pink */
+  --color-neon-pink: #ff00ff;
+  --color-neon-pink-dim: rgba(255, 0, 255, 0.3);
+  --color-neon-pink-glow: rgba(255, 0, 255, 0.5);
+
+  /* Lab White */
+  --color-lab-white: #f0f0f5;
+  --color-lab-white-dim: rgba(240, 240, 245, 0.7);
+
+  /* Status Colors */
+  --color-success: #00ff88;
+  --color-warning: #ffcc00;
+  --color-error: #ff4444;
+  --color-info: #00d4ff;
+
+  /* Satellite Colors */
+  --color-shaka: #ffd700;     /* Gold - Logic */
+  --color-lilith: #ff4444;    /* Red - Evil/Critic */
+  --color-edison: #00ff88;    /* Green - Thinking */
+  --color-pythagoras: #00d4ff; /* Blue - Wisdom */
+  --color-atlas: #ff8800;     /* Orange - Action */
+  --color-york: #cc00ff;      /* Purple - Greed */
+
+  /* === Typography === */
+  --font-primary: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  --font-display: 'Orbitron', 'Exo 2', sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 3rem;
+
+  /* === Spacing === */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* === Borders === */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  --border-thin: 1px solid rgba(0, 212, 255, 0.2);
+  --border-glow: 1px solid var(--color-holo-blue);
+
+  /* === Effects === */
+  --shadow-glow: 0 0 20px var(--color-holo-blue-glow);
+  --shadow-glow-pink: 0 0 20px var(--color-neon-pink-glow);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
+
+  --blur-glass: blur(10px);
+  --gradient-holo: linear-gradient(135deg, var(--color-holo-blue) 0%, var(--color-neon-pink) 100%);
+  --gradient-dark: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+
+  /* === Animations === */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.4s ease;
+}
+
+/* === Global Styles === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background: var(--gradient-dark);
+  color: var(--color-lab-white);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* === Scrollbar Styling === */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-holo-blue-dim);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-holo-blue);
+}
+
+/* === Typography === */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+h1 { font-size: var(--font-size-3xl); }
+h2 { font-size: var(--font-size-2xl); }
+h3 { font-size: var(--font-size-xl); }
+h4 { font-size: var(--font-size-lg); }
+
+/* === Utility Classes === */
+.text-holo {
+  color: var(--color-holo-blue);
+  text-shadow: 0 0 10px var(--color-holo-blue-glow);
+}
+
+.text-pink {
+  color: var(--color-neon-pink);
+  text-shadow: 0 0 10px var(--color-neon-pink-glow);
+}
+
+.text-gradient {
+  background: var(--gradient-holo);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass-panel {
+  background: var(--color-bg-card);
+  backdrop-filter: var(--blur-glass);
+  border: var(--border-thin);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.glow-border {
+  border: var(--border-glow);
+  box-shadow: var(--shadow-glow);
+}
+
+/* === Button Styles === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: var(--border-thin);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.btn-primary {
+  background: var(--gradient-holo);
+  color: var(--color-bg-primary);
+  border: none;
+}
+
+.btn-primary:hover {
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-holo-blue);
+  border: 1px solid var(--color-holo-blue);
+}
+
+.btn-secondary:hover {
+  background: var(--color-holo-blue-dim);
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-lab-white-dim);
+  border: 1px solid transparent;
+}
+
+.btn-ghost:hover {
+  color: var(--color-holo-blue);
+  border-color: var(--color-holo-blue-dim);
+}
+
+/* === Input Styles === */
+.input {
+  width: 100%;
+  padding: var(--space-md);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  color: var(--color-lab-white);
+  background: var(--color-bg-tertiary);
+  border: var(--border-thin);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.input:focus {
+  border-color: var(--color-holo-blue);
+  box-shadow: var(--shadow-glow);
+}
+
+.input::placeholder {
+  color: var(--color-lab-white-dim);
+  opacity: 0.5;
+}
+
+/* === Card Styles === */
+.card {
+  background: var(--color-bg-card);
+  backdrop-filter: var(--blur-glass);
+  border: var(--border-thin);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: var(--border-thin);
+}
+
+/* === Animations === */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px var(--color-holo-blue-glow);
+  }
+  50% {
+    box-shadow: 0 0 30px var(--color-holo-blue-glow), 0 0 60px var(--color-holo-blue-dim);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes scan-line {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes text-flicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  25%, 75% {
+    opacity: 0.95;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-flicker {
+  animation: text-flicker 0.1s infinite;
+}
+
+/* === Grid Background === */
+.grid-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* === Lab Indicator Lights === */
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid currentColor;
+}
+
+.indicator-success {
+  background: var(--color-success);
+  box-shadow: 0 0 10px var(--color-success);
+}
+
+.indicator-warning {
+  background: var(--color-warning);
+  box-shadow: 0 0 10px var(--color-warning);
+}
+
+.indicator-error {
+  background: var(--color-error);
+  box-shadow: 0 0 10px var(--color-error);
+}
+
+.indicator-idle {
+  background: var(--color-lab-white-dim);
+  opacity: 0.5;
+}

@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
+import './styles/theme.css'
 import './App.css'
 import { BrowserAICapabilities } from '@/utils'
 import { useAppStore } from '@/store'
-import { Dashboard } from '@/components'
+import { StellaLayout } from '@/components/stella'
 
 function App() {
   const { setCapabilities } = useAppStore()
@@ -22,7 +23,7 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return <Dashboard />
+  return <StellaLayout />
 }
 
 export default App

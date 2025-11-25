@@ -1,0 +1,202 @@
+/**
+ * Stella Layout Styles
+ * Main application layout with Egghead Aesthetics
+ */
+
+.stella-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Header */
+.stella-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-xl);
+  background: var(--color-bg-secondary);
+  border-bottom: var(--border-thin);
+  z-index: 100;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.brand-icon {
+  font-size: 2rem;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-text h1 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  margin: 0;
+  background: var(--gradient-holo);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brand-tagline {
+  font-size: var(--font-size-xs);
+  color: var(--color-lab-white-dim);
+  opacity: 0.6;
+  letter-spacing: 0.05em;
+}
+
+.header-status {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar-toggle {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+}
+
+/* Main Content */
+.stella-main {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  padding: var(--space-lg);
+  gap: var(--space-lg);
+}
+
+/* Chat Area */
+.chat-area {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sidebar */
+.stella-sidebar {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.stella-sidebar.collapsed {
+  width: 0;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar-section {
+  flex-shrink: 0;
+}
+
+.sidebar-section.flex-grow {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.sidebar-section.flex-grow .logpose {
+  height: 100%;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .stella-sidebar {
+    width: 300px;
+  }
+}
+
+@media (max-width: 992px) {
+  .stella-sidebar {
+    position: fixed;
+    top: 70px;
+    right: 0;
+    bottom: 0;
+    width: 350px;
+    background: var(--color-bg-secondary);
+    padding: var(--space-lg);
+    border-left: var(--border-thin);
+    z-index: 99;
+    transform: translateX(0);
+  }
+
+  .stella-sidebar.collapsed {
+    transform: translateX(100%);
+    opacity: 1;
+    width: 350px;
+    padding: var(--space-lg);
+  }
+
+  .chat-area {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .stella-header {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .header-status {
+    display: none;
+  }
+
+  .stella-main {
+    padding: var(--space-md);
+  }
+
+  .stella-sidebar {
+    width: 100%;
+    left: 0;
+  }
+}
+
+/* Scan Line Effect (optional) */
+.stella-layout::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-holo-blue-dim),
+    transparent
+  );
+  animation: scan-line 8s linear infinite;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.3;
+}
+
+@keyframes scan-line {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: 100vh;
+  }
+}

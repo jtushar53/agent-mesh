@@ -1,0 +1,259 @@
+/**
+ * Satellite Panel Styles
+ * Grid display of the 6 satellite agents
+ */
+
+.satellite-panel {
+  background: var(--color-bg-card);
+  border: var(--border-thin);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  overflow: hidden;
+}
+
+.satellite-panel-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: var(--border-thin);
+}
+
+.satellite-panel-header h3 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.15em;
+  color: var(--color-holo-blue);
+  margin: 0;
+}
+
+.header-subtitle {
+  font-size: var(--font-size-xs);
+  color: var(--color-lab-white-dim);
+  opacity: 0.6;
+}
+
+.satellite-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+}
+
+@media (max-width: 768px) {
+  .satellite-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.satellite-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-md);
+  background: var(--color-bg-tertiary);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+  overflow: hidden;
+}
+
+.satellite-card:hover {
+  border-color: var(--satellite-color, var(--color-holo-blue-dim));
+  transform: translateY(-2px);
+}
+
+.satellite-card.active {
+  border-color: var(--satellite-color, var(--color-holo-blue));
+  box-shadow: 0 0 20px color-mix(in srgb, var(--satellite-color) 30%, transparent);
+}
+
+.satellite-avatar {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-sm);
+}
+
+.satellite-emoji {
+  font-size: 1.8rem;
+  z-index: 1;
+}
+
+.satellite-ring {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--satellite-color, var(--color-holo-blue-dim));
+  border-radius: 50%;
+  opacity: 0.3;
+  transition: all var(--transition-normal);
+}
+
+.satellite-card:hover .satellite-ring,
+.satellite-card.active .satellite-ring {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.satellite-card.thinking .satellite-ring {
+  animation: ring-pulse 1s infinite;
+}
+
+.satellite-card.executing .satellite-ring {
+  animation: ring-spin 2s linear infinite;
+}
+
+@keyframes ring-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+@keyframes ring-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.satellite-info {
+  text-align: center;
+  margin-bottom: var(--space-xs);
+}
+
+.satellite-name {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--satellite-color, var(--color-lab-white));
+}
+
+.satellite-archetype {
+  font-size: 0.65rem;
+  color: var(--color-lab-white-dim);
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.satellite-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-lab-white-dim);
+  transition: all var(--transition-fast);
+}
+
+.status-indicator.idle {
+  background: var(--color-lab-white-dim);
+  opacity: 0.4;
+}
+
+.status-indicator.thinking {
+  background: var(--color-warning);
+  box-shadow: 0 0 8px var(--color-warning);
+  animation: pulse-glow 1s infinite;
+}
+
+.status-indicator.executing {
+  background: var(--color-holo-blue);
+  box-shadow: 0 0 8px var(--color-holo-blue);
+  animation: pulse-glow 0.5s infinite;
+}
+
+.status-indicator.waiting {
+  background: var(--color-info);
+  animation: blink 1.5s infinite;
+}
+
+.status-indicator.completed {
+  background: var(--color-success);
+  box-shadow: 0 0 8px var(--color-success);
+}
+
+.status-indicator.error {
+  background: var(--color-error);
+  box-shadow: 0 0 8px var(--color-error);
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.status-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-lab-white-dim);
+}
+
+.satellite-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-bg-secondary);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--satellite-color, var(--color-holo-blue));
+  transition: width var(--transition-normal);
+}
+
+.thinking-animation {
+  position: absolute;
+  bottom: var(--space-sm);
+  display: flex;
+  gap: 4px;
+}
+
+.thinking-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--color-warning);
+  border-radius: 50%;
+  animation: thinking-bounce 1.4s infinite ease-in-out;
+}
+
+.thinking-dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.thinking-dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes thinking-bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}

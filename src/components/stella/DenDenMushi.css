@@ -1,0 +1,218 @@
+/**
+ * Den Den Mushi Styles
+ * Cyber-aesthetic snail phone indicator
+ */
+
+.dendenmushi {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-bg-card);
+  border: var(--border-thin);
+  border-radius: var(--radius-xl);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.dendenmushi-shell {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.dendenmushi-body {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-tertiary);
+  border-radius: 50%;
+  border: 2px solid var(--color-holo-blue-dim);
+  transition: all var(--transition-normal);
+}
+
+.dendenmushi-emoji {
+  font-size: 1.5rem;
+  filter: grayscale(0.3);
+  transition: filter var(--transition-normal);
+}
+
+.dendenmushi-antenna {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.antenna-segment {
+  width: 2px;
+  height: 6px;
+  background: var(--color-holo-blue-dim);
+  border-radius: var(--radius-full);
+}
+
+.antenna-tip {
+  width: 6px;
+  height: 6px;
+  background: var(--color-holo-blue-dim);
+  border-radius: 50%;
+  margin-top: 2px;
+}
+
+.dendenmushi-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dendenmushi-label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-lab-white);
+}
+
+.dendenmushi-description {
+  font-size: var(--font-size-xs);
+  color: var(--color-lab-white-dim);
+  opacity: 0.7;
+}
+
+/* Sleep State */
+.dendenmushi.sleep .dendenmushi-body {
+  border-color: var(--color-lab-white-dim);
+  opacity: 0.6;
+}
+
+.dendenmushi.sleep .dendenmushi-emoji {
+  filter: grayscale(1);
+}
+
+.dendenmushi.sleep .antenna-segment,
+.dendenmushi.sleep .antenna-tip {
+  background: var(--color-lab-white-dim);
+  opacity: 0.4;
+}
+
+/* Call State */
+.dendenmushi.call {
+  border-color: var(--color-warning);
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+}
+
+.dendenmushi.call .dendenmushi-body {
+  border-color: var(--color-warning);
+  animation: pulse-call 0.5s infinite;
+}
+
+.dendenmushi.call .dendenmushi-emoji {
+  filter: grayscale(0);
+}
+
+.dendenmushi.call .antenna-segment,
+.dendenmushi.call .antenna-tip {
+  background: var(--color-warning);
+}
+
+.dendenmushi.call .dendenmushi-label {
+  color: var(--color-warning);
+}
+
+/* Signal State */
+.dendenmushi.signal {
+  border-color: var(--color-success);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+}
+
+.dendenmushi.signal .dendenmushi-body {
+  border-color: var(--color-success);
+}
+
+.dendenmushi.signal .dendenmushi-emoji {
+  filter: grayscale(0) brightness(1.2);
+}
+
+.dendenmushi.signal .antenna-segment,
+.dendenmushi.signal .antenna-tip {
+  background: var(--color-success);
+  box-shadow: 0 0 5px var(--color-success);
+}
+
+.dendenmushi.signal .dendenmushi-label {
+  color: var(--color-success);
+}
+
+/* Waves Animation (during call) */
+.dendenmushi-waves {
+  position: absolute;
+  right: var(--space-md);
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.wave {
+  width: 4px;
+  background: var(--color-warning);
+  border-radius: var(--radius-full);
+  animation: wave-pulse 1s infinite;
+}
+
+.wave-1 {
+  height: 8px;
+  animation-delay: 0s;
+}
+
+.wave-2 {
+  height: 14px;
+  animation-delay: 0.15s;
+}
+
+.wave-3 {
+  height: 20px;
+  animation-delay: 0.3s;
+}
+
+@keyframes pulse-call {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes wave-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scaleY(0.6);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/* Animating state */
+.dendenmushi.animating {
+  animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+}
