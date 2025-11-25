@@ -1,57 +1,132 @@
-# 🕸️ AgentMesh
+# 🍎 PROJECT STELLA: The Local Intelligence OS
 
-> **ChatGPT + Claude + Perplexity, but FREE, OFFLINE, and in your browser**
+> **"The World's Intelligence, Disconnected."**
 
-Run enterprise-grade AI agents locally. Zero API costs. Infinite privacy. Powered by WebGPU.
+**Project Stella** is a browser-native, privacy-first **Agent Mesh** powered by WebGPU. It brings the architecture of a sophisticated Multi-Agent System to your local machine, requiring zero internet and zero monthly fees.
+
+Inspired by the distributed cognition of **Dr. Vegapunk**, Stella splits intelligence into specialized "Satellites"—autonomous agents that Plan, Code, Research, and Execute—all sharing a single, local Vector Database known as **Punk Records**.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue)](https://www.typescriptlang.org/)
 [![WebGPU](https://img.shields.io/badge/WebGPU-Accelerated-green)](https://gpuweb.github.io/gpuweb/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-[🚀 Quick Start](#-quick-start) • [✨ Features](#-features) • [📖 Documentation](#-documentation) • [🤝 Contributing](#-contributing) • [💬 Discord](#-community)
+---
+
+## 🏗️ Core Architecture
+
+Stella creates an "Air-Gapped" Intelligence Environment inside the user's browser.
+
+### The Tech Stack
+* **Runtime Environment:** Browser (Chrome/Edge/Arc/Safari) via **WebGPU**.
+* **Inference Engine:** `WebLLM` (MLC AI) for running quantized LLMs (Llama-3, Phi-3, Qwen).
+* **Orchestration:** `LangChain.js` / Custom State Graph (DAG).
+* **Tooling Protocol:** **MCP (Model Context Protocol)** for standardizing tool connections.
+
+### The Data Layer: "Punk Records"
+Instead of a simple file upload, we utilize a multi-modal local database:
+1.  **Vector Store (Semantic):** `Voy` (WASM-based) for understanding concepts.
+2.  **Keyword Store (Exact):** `FlexSearch` for retrieving IDs, Error Codes, and Syntax.
+3.  **Graph Store (Relational):** `Kuzu-WASM` (Planned) to link entities and concepts.
+
+**🔒 Privacy Guarantee:** All data processing happens in `IndexedDB` within the browser sandbox. No data ever leaves the user's device.
 
 ---
 
-## 🎯 **What is AgentMesh?**
+## 📡 The Satellite System (Agent Mesh)
 
-AgentMesh brings **ChatGPT-level AI capabilities** to your browser with:
-- ✅ **Zero Cost** - No API subscriptions ($0 vs $20-60/month)
-- ✅ **100% Private** - All processing happens locally, nothing leaves your browser
-- ✅ **Fully Offline** - Works without internet after initial model download
-- ✅ **Open Source** - Full control, extend and customize as needed
-- ✅ **Blazing Fast** - WebGPU acceleration (25+ tokens/sec on M1)
+Stella is not a chatbot. It is a mesh of 6 specialized agents, each optimized for a specific cognitive domain.
 
-Built for developers who want AI agent capabilities without the recurring costs, privacy concerns, or cloud dependencies.
+### 01. SHAKA (The Orchestrator)
+* **Archetype:** Logic & Good.
+* **Role:** The CEO. Shaka parses user intent, breaks it into a Dependency Graph (DAG), and assigns sub-tasks to other satellites.
+* **Intelligence Upgrade:**
+    * **Reflection Loops:** Shaka simulates the outcome of a plan before executing it.
+    * **Structured Output:** Strictly enforces JSON Schema for all internal communication.
+* **Future Proofing:** Will support "long-horizon planning" to manage tasks that take days to complete.
+
+### 02. LILITH (The Critic)
+* **Archetype:** Evil (Malice against errors).
+* **Role:** The Red Teamer. Lilith monitors outputs for hallucinations, bugs, and security risks.
+* **Intelligence Upgrade:**
+    * **Static Analysis:** Runs WASM-based linters (ESLint/Ruff) on generated code.
+    * **Fact Checking:** Cross-references answers against *Punk Records* to detect hallucinations.
+* **Future Proofing:** Automated Adversarial Testing to attempt to "break" the system's logic.
+
+### 03. EDISON (The Inventor)
+* **Archetype:** Thinking.
+* **Role:** The Engineer. Specialized in code generation and creative writing.
+* **Intelligence Upgrade:**
+    * **In-Context Learning:** Automatically pulls the user's existing codebase style into the context window.
+    * **Documentation RAG:** Has exclusive priority access to technical documentation indices.
+* **Future Proofing:** Integration with **WebContainer API** to execute and test code directly in the browser tab.
+
+### 04. PYTHAGORAS (The Researcher)
+* **Archetype:** Wisdom.
+* **Role:** Data Retrieval & Synthesis.
+* **Intelligence Upgrade:**
+    * **GraphRAG Lite:** Traverses knowledge graphs to find hidden connections between documents.
+    * **Query Expansion:** Generates 5+ search variations to ensure maximum recall.
+* **Future Proofing:** Multi-modal indexing (OCR for images/diagrams) to "read" screenshots and whiteboards.
+
+### 05. ATLAS (The Warrior)
+* **Archetype:** Violence (Action).
+* **Role:** The Tool Executor. The interface between the AI and the outside world.
+* **Intelligence Upgrade:**
+    * **MCP Host:** Acts as the dedicated client for all Model Context Protocol servers.
+    * **Self-Correction:** Analyzes API error codes (e.g., 500 vs 404) and adjusts parameters automatically.
+* **Future Proofing:** Headless browser automation for navigating websites without APIs.
+
+### 06. YORK (The Manager)
+* **Archetype:** Greed.
+* **Role:** Resource & Optimization Manager.
+* **Intelligence Upgrade:**
+    * **Context Eviction:** Intelligently summarizes and "forgets" old conversation turns to save RAM.
+    * **Dynamic Quantization:** Swaps models based on battery life (e.g., Llama-3-8B -> Phi-3-Mini).
+* **Future Proofing:** Distributed Compute—offloading inference to other devices on the local LAN.
 
 ---
 
-## ⚡ **Quick Start**
+## 💾 Feature Deep Dives
 
-### Try It Now (No Installation)
+### "The Brain-Brain Cut" (Context Slicing)
+* **Problem:** Browser memory is limited.
+* **Solution:** When the context window fills, York triggers a "Cut." The oldest segment is summarized into a high-density vector and stored in *Punk Records*, keeping the "Active RAM" fresh while preserving long-term memory.
 
+### "Den Den Mushi" Protocol (MCP Integration)
+* **Visual Indicator:** A status icon representing the connection state.
+    * 🐌 **Sleep:** Offline / Air-gapped.
+    * 🐌📢 **Call:** Tool Execution in progress.
+    * 🐌✨ **Signal:** Data received from external source.
+
+---
+
+## 🎨 UI/UX Philosophy: "Egghead Aesthetics"
+
+The interface rejects the sterile "SaaS" look in favor of a **Cyber-Future-Retro** aesthetic.
+
+* **Visual Language:** Rounded corners, holographic overlays, and terminal-style typography.
+* **The Log Pose:** The navigation menu is replaced by a "Log Pose" timeline, tracking the user's journey through tasks.
+* **Lab Atmosphere:** The background and color palette mimic a high-tech laboratory (White, Holographic Blue, Neon Pink accents).
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+* A WebGPU-enabled browser (Chrome 113+, Edge, Arc).
+* A GPU with at least 4GB VRAM recommended.
+
+### Installation
 ```bash
-# Coming soon: Live demo
-# npx agentmesh
-```
+# Clone the repository
+git clone https://github.com/yourusername/project-stella.git
 
-### Local Development
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/yourusername/agentmesh.git
-cd agentmesh
-
-# 2. Install dependencies
+# Install dependencies
 npm install
 
-# 3. Start development server
+# Run the local development lab
 npm run dev
-# Opens at http://localhost:5173
-
-# 4. (Optional) Start mock MCP server for testing
-cd mcp-server && npm install && npm start
-# Runs at http://localhost:3001
 ```
 
 **First-time setup:**
@@ -63,223 +138,13 @@ cd mcp-server && npm install && npm start
 
 ---
 
-## 🆚 **How Does It Compare?**
-
-| Feature | AgentMesh | ChatGPT Plus | Claude Pro | Perplexity Pro |
-|---------|-----------|--------------|------------|----------------|
-| **Monthly Cost** | **$0** | $20 | $20 | $20 |
-| **Privacy** | **100% Local** | ❌ Cloud | ❌ Cloud | ❌ Cloud |
-| **Offline Mode** | **✅ Full** | ❌ No | ❌ No | ❌ No |
-| **Customizable** | **✅ Full Source** | ❌ API Only | ❌ API Only | ❌ API Only |
-| **Memory/RAG** | **✅ v1.0** | Limited | Projects | Collections |
-| **Web Automation** | **✅ v1.0** | Via Plugins | ❌ No | Limited |
-| **Tool Integration** | **✅ MCP Protocol** | Plugins | ❌ No | Limited |
-| **Context Window** | 128K tokens | 128K | 200K | Variable |
-| **Speed** | 25+ tok/sec* | ~40 tok/sec | ~35 tok/sec | ~30 tok/sec |
-
-<sub>*Performance depends on hardware. Benchmarked on M1 MacBook Pro with WebGPU.</sub>
-
-**The Bottom Line:** AgentMesh gives you 80% of ChatGPT's capabilities at 0% of the cost, with 100% of your privacy intact.
-
----
-
-## ✨ **Features**
-
-### 🧠 **AI Agent Framework**
-- **ReAct Agent Pattern** - Reasoning and acting in iterative loops
-- **Chain-of-Thought** - Step-by-step problem decomposition *[Planned - v1.0]*
-- **Tree-of-Thoughts** - Multi-path reasoning exploration *[Planned - v1.0]*
-- **Multi-Agent Support** - Orchestrate multiple specialized agents *[Planned - v1.0]*
-- **Tool Integration** - MCP (Model Context Protocol) for extensible tool use
-
-### 💾 **Memory & Context**
-- **Session Memory** - Maintains conversation context
-- **Long-term Memory** - RAG (Retrieval Augmented Generation) with vector search *[Planned - v1.0]*
-- **Custom Instructions** - Define agent behavior per project *[Planned - v1.0]*
-- **Context Management** - Smart chunking for large conversations
-
-### 🛠️ **Model Context Protocol (MCP)**
-- **Built-in MCP Client** - Connect to any MCP server
-- **Demo Tools Included:**
-  - Calculator - Math operations
-  - Time - Current time retrieval
-  - Text Processing - Reverse text, word count
-- **Easy Integration** - Add custom tools via JSON config
-
-### ⚙️ **Technical Capabilities**
-- **WebGPU Acceleration** - Hardware-accelerated inference
-- **Web Worker Architecture** - Non-blocking UI during inference
-- **Multiple Model Support** - Switch between models (1B-3B params)
-- **Function Calling** - Llama models support native tool calling
-- **Streaming Responses** - Real-time token streaming
-- **IndexedDB Storage** - Persistent local storage
-
-### 🎨 **User Interface**
-- **Clean Dashboard** - Intuitive tab-based navigation
-- **LLM Tester** - Load and test models interactively
-- **Agent Viewer** - Execute and monitor agent tasks
-- **MCP Manager** - Configure tool server connections
-- **Responsive Design** - Works on desktop and tablets
-
----
-
-## 🏗️ **Architecture**
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                    Browser (Client)                     │
-├─────────────────────────────────────────────────────────┤
-│                                                         │
-│  ┌──────────────┐      ┌──────────────┐               │
-│  │   React UI   │◄────►│ Zustand Store│               │
-│  └──────┬───────┘      └──────┬───────┘               │
-│         │                     │                        │
-│  ┌──────▼──────────────────────▼────────┐             │
-│  │         Agent Framework               │             │
-│  │  ┌────────────┐    ┌──────────────┐  │             │
-│  │  │ReAct Agent │    │  Tool System │  │             │
-│  │  └─────┬──────┘    └──────┬───────┘  │             │
-│  └────────┼──────────────────┼──────────┘             │
-│           │                  │                        │
-│  ┌────────▼──────┐   ┌───────▼────────┐              │
-│  │  LLM Service  │   │  MCP Client    │              │
-│  │  (WebLLM)     │   │  (HTTP/SSE)    │              │
-│  └────────┬──────┘   └───────┬────────┘              │
-│           │                  │                        │
-│  ┌────────▼──────┐          │                        │
-│  │  Web Worker   │          │                        │
-│  │  (Inference)  │          │                        │
-│  └────────┬──────┘          │                        │
-│           │                 │                        │
-│  ┌────────▼─────────────────▼────────┐              │
-│  │         WebGPU / WASM              │              │
-│  └────────────────────────────────────┘              │
-│                                                       │
-└───────────────────────┬───────────────────────────────┘
-                        │
-                        │ HTTP/SSE
-                        │
-            ┌───────────▼───────────┐
-            │   MCP Servers         │
-            │  (External Tools)     │
-            └───────────────────────┘
-```
-
-**Key Components:**
-- **React UI** - User interface components
-- **Zustand Store** - Centralized state management with persistence
-- **Agent Framework** - ReAct pattern implementation
-- **LLM Service** - WebLLM wrapper for model inference
-- **Web Worker** - Offloads heavy computation from main thread
-- **MCP Client** - Browser-compatible MCP protocol client
-- **WebGPU** - Hardware-accelerated computation
-- **WASM** - Fallback for CPU inference
-
----
-
-## 🚀 **Available Models**
-
-| Model | Parameters | Download | Context | Speed* | Function Calling | Best For |
-|-------|-----------|----------|---------|--------|------------------|----------|
-| **Llama-3.2-1B** | 1B | 600 MB | 128K | ~40 tok/s | ✅ | Quick tasks, fast responses |
-| **Llama-3.2-3B** | 3B | 1.8 GB | 128K | ~25 tok/s | ✅ | **Recommended** - Best balance |
-| **Phi-3-mini** | 3.8B | 2.1 GB | 4K | ~20 tok/s | ❌ | Specialized reasoning |
-
-<sub>*Speed benchmarked on M1 MacBook Pro with WebGPU. Your performance may vary.</sub>
-
-**Quantization:** All models use INT4 quantization (q4f32_1-MLC):
-- 87.5% smaller than FP32 models
-- ~2-5% accuracy loss vs full precision
-- Optimized for WebGPU acceleration
-- Fits within browser memory constraints
-
----
-
-## 📖 **Documentation**
-
-### Project Structure
-
-```
-AgentMesh/
-├── src/
-│   ├── agents/              # AI agent implementations
-│   │   └── react-agent.ts       # ReAct pattern agent
-│   ├── components/          # React UI components
-│   │   ├── Dashboard.tsx        # Main dashboard
-│   │   ├── LLMTester.tsx        # Model testing interface
-│   │   ├── AgentViewer.tsx      # Agent execution UI
-│   │   └── MCPManager.tsx       # MCP server config
-│   ├── services/            # Core services
-│   │   ├── mcp-client.ts        # MCP browser client
-│   │   └── llm-service.ts       # WebLLM wrapper
-│   ├── store/               # State management
-│   │   └── app-store.ts         # Zustand store
-│   ├── types/               # TypeScript definitions
-│   ├── utils/               # Utility functions
-│   └── workers/             # Web Workers
-│       └── llm-worker.ts        # Inference worker
-├── mcp-server/              # Mock MCP server
-│   └── server.js                # Express demo server
-└── tests/                   # E2E tests
-    └── mcp-integration.spec.ts
-```
-
-### MCP Tools
-
-The included mock MCP server provides demo tools:
-
-| Tool | Description | Example Usage |
-|------|-------------|---------------|
-| `calculator` | Perform math calculations | `{ "expression": "2 + 2" }` |
-| `get_time` | Get current server time | `{}` |
-| `reverse_text` | Reverse a text string | `{ "text": "Hello" }` |
-| `word_count` | Count words and characters | `{ "text": "Hello World" }` |
-
-**Connecting to Custom MCP Servers:**
-
-Use JSON Config mode in the MCP Manager:
-
-```json
-{
-  "mcpServers": {
-    "demo-server": {
-      "url": "http://localhost:3001/mcp",
-      "description": "Local demo server"
-    },
-    "custom-tools": {
-      "url": "http://localhost:3002/mcp",
-      "description": "Your custom MCP server"
-    }
-  }
-}
-```
-
----
-
-## 🧪 **Testing**
-
-```bash
-# Run E2E tests
-npm test
-
-# Run tests in UI mode (interactive)
-npm run test:ui
-
-# Run tests in headed mode (see browser)
-npm run test:headed
-```
-
-Tests use Playwright for browser automation and MCP integration validation.
-
----
-
-## 🛠️ **Tech Stack**
+## 🛠️ Tech Stack
 
 **Frontend:**
 - React 18.3.1 with TypeScript 5.6 (strict mode)
 - Vite 6.0.1 (build tool with HMR)
 - Zustand 4.5.5 (state management)
-- ReactFlow 11.11.4 (workflow visualization - coming soon)
+- ReactFlow 11.11.4 (workflow visualization)
 
 **AI/ML:**
 - WebLLM 0.2.72 (browser LLM inference)
@@ -288,40 +153,48 @@ Tests use Playwright for browser automation and MCP integration validation.
 
 **Storage & Validation:**
 - IndexedDB (via idb 8.0.0) - Browser storage
+- Voy (WASM) - Vector Store
+- FlexSearch - Keyword Search
 - Zod 3.23.8 - Runtime type validation
 
 **Testing:**
 - Playwright 1.48.2 - E2E browser testing
 
-**Backend (Demo Only):**
-- Express 4.21.1 - Mock MCP server
-- Node.js (ES Modules)
+---
+
+## 🗺️ Roadmap
+
+### Phase 1: Foundation (Current)
+- [x] Core agent framework
+- [x] WebGPU inference engine
+- [x] MCP integration
+- [ ] Punk Records (Vector + Keyword Store)
+
+### Phase 2: Satellite System
+- [ ] SHAKA (Orchestrator) implementation
+- [ ] LILITH (Critic) implementation
+- [ ] EDISON (Inventor) implementation
+- [ ] PYTHAGORAS (Researcher) implementation
+- [ ] ATLAS (Warrior) implementation
+- [ ] YORK (Manager) implementation
+
+### Phase 3: Intelligence Upgrades
+- [ ] GraphRAG Lite
+- [ ] Brain-Brain Cut (Context Slicing)
+- [ ] Dynamic Quantization
+- [ ] Reflection Loops
+
+### Phase 4: Future Proofing
+- [ ] Kuzu-WASM Graph Store
+- [ ] WebContainer Integration
+- [ ] Multi-modal indexing (OCR)
+- [ ] Distributed Compute (LAN)
 
 ---
 
-## 🗺️ **Roadmap**
+## 🤝 Contributing
 
-**Current:** v0.1 - Fully functional prototype with core agent framework, WebLLM, and MCP integration
-
-**Next Up (v1.0):**
-- 🧠 Memory System with RAG (vector database, semantic search)
-- ⚡ Enhanced Reasoning (Chain-of-Thought, Tree-of-Thoughts visualization)
-- 📁 Project Contexts (like Claude Projects - isolated workspaces)
-- 💻 Code Execution Sandbox (safe JavaScript/Python interpreter)
-- 🔧 Browser Extension (AI in every tab, offline support)
-- 🎨 Visual Workflow Builder (no-code agent design)
-- 🤖 Multi-Agent Orchestration (specialized AI collaboration)
-- 📦 Developer SDK (NPM package, React components, CLI)
-
-**Future (v2.0+):** Voice interfaces, vision support, agent marketplace, mobile PWA
-
-[View detailed roadmap →](https://github.com/yourusername/agentmesh/issues)
-
----
-
-## 🤝 **Contributing**
-
-We love contributions! AgentMesh is built by developers, for developers.
+We love contributions! Project Stella is built by developers, for developers.
 
 ### Ways to Contribute
 
@@ -341,38 +214,11 @@ We love contributions! AgentMesh is built by developers, for developers.
 6. Push to your fork (`git push origin feature/amazing-feature`)
 7. Open a Pull Request
 
-**Good First Issues:** [View beginner-friendly tasks →](https://github.com/yourusername/agentmesh/labels/good-first-issue)
-
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ---
 
-## 💬 **Community**
-
-Join the AgentMesh community:
-
-- **Discord** - [Coming soon] - Get help, share projects, contribute
-- **GitHub Discussions** - [Ask questions, share ideas](https://github.com/yourusername/agentmesh/discussions)
-- **Twitter/X** - [@yourusername](https://twitter.com/yourusername) - Updates and announcements
-- **Blog** - [Technical deep dives](https://yourblog.com) (coming soon)
-
----
-
-## 📊 **Project Status**
-
-**Current Status:** 🟢 **Active Development** - Fully functional prototype
-
-- ✅ Core systems operational
-- ✅ Agent framework working
-- ✅ WebGPU inference stable
-- ✅ MCP integration complete
-- 🔨 Expanding features based on community feedback
-
-**Last Updated:** January 2025
-
----
-
-## 📄 **License**
+## 📄 License
 
 MIT License - see [LICENSE](LICENSE) for details.
 
@@ -380,7 +226,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-## 🙏 **Acknowledgments**
+## 🙏 Acknowledgments
 
 Built with amazing open-source technologies:
 
@@ -390,20 +236,7 @@ Built with amazing open-source technologies:
 - [Vite](https://vitejs.dev/) - Build tool
 - [Zustand](https://github.com/pmndrs/zustand) - State management
 
----
-
-## 🚀 **Ready to Get Started?**
-
-```bash
-git clone https://github.com/yourusername/agentmesh.git
-cd agentmesh
-npm install
-npm run dev
-```
-
-**Questions?** Open an issue or start a discussion!
-
-**Like the project?** Give us a ⭐ star on GitHub!
+Inspired by the genius of **Dr. Vegapunk** and the concept of distributed cognition.
 
 ---
 
@@ -411,6 +244,8 @@ npm run dev
 
 **Built with ❤️ by developers who believe AI should be accessible, private, and free**
 
-[⬆ Back to Top](#️-agentmesh)
+**"The World's Intelligence, Disconnected."**
+
+[⬆ Back to Top](#-project-stella-the-local-intelligence-os)
 
 </div>
